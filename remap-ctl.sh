@@ -4,7 +4,7 @@ set -euo pipefail
 # remap-ctl.sh — CLI management for remap-ctl
 # Manages config, compilation, installation, and the LaunchAgent daemon.
 
-BUNDLE_ID="com.guerra.remap-ctl"
+BUNDLE_ID="com.mwguerra.remap-ctl"
 APP_NAME="RemapCtl"
 APP_BUNDLE="${APP_NAME}.app"
 INSTALL_PATH="/Applications/${APP_BUNDLE}"

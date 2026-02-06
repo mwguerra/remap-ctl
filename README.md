@@ -122,7 +122,7 @@ The binary is wrapped in a `.app` bundle because macOS only reliably accepts `.a
 ## Troubleshooting
 
 - **"Could not create event tap"**: Grant Accessibility permission. If already listed, remove and re-add it.
-- **Permission not sticking**: The code signature changed. Run `tccutil reset Accessibility com.guerra.remap-ctl`, then remove and re-add in System Settings.
+- **Permission not sticking**: The code signature changed. Run `tccutil reset Accessibility com.mwguerra.remap-ctl`, then remove and re-add in System Settings.
 - **Check if running**: `launchctl list | grep remap-ctl` — `0` in the second column = running, `1` = crashing.
 - **View logs**: `cat /tmp/remap-ctl.log` and `cat /tmp/remap-ctl.err`
 - **Wrong characters**: The code sets Unicode directly, so layout shouldn't matter. If wrong, verify config hex values.
