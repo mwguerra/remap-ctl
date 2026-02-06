@@ -1,4 +1,4 @@
-# remap-home-to-slash
+# remap-ctl
 
 A configurable CGEventTap key remapper for macOS, with a CLI for managing mappings.
 
@@ -52,7 +52,7 @@ Use `passthrough` as the hex value to let the original key through for that modi
 
 ## Configuration
 
-**File**: `~/.config/remap-home-to-slash/config.json`
+**File**: `~/.config/remap-ctl/config.json`
 
 ```json
 {
@@ -127,15 +127,15 @@ If you had the old hardcoded version installed:
 2. The installer creates a default config with the same Home→/ mapping
 3. **Re-grant Accessibility permission** (the binary signature changed):
    - System Settings → Privacy & Security → Accessibility
-   - Remove the old RemapHomeToSlash entry, then add it again
-   - Or run `tccutil reset Accessibility com.guerra.remap-home-to-slash` then re-add
+   - Remove the old RemapCtl entry, then add it again
+   - Or run `tccutil reset Accessibility com.guerra.remap-ctl` then re-add
 
 ## Troubleshooting
 
 - **"Could not create event tap"**: Grant Accessibility permission. If already listed, remove and re-add it.
-- **Permission not sticking**: The code signature changed. Run `tccutil reset Accessibility com.guerra.remap-home-to-slash`, then remove and re-add in System Settings.
+- **Permission not sticking**: The code signature changed. Run `tccutil reset Accessibility com.guerra.remap-ctl`, then remove and re-add in System Settings.
 - **Check if running**: `launchctl list | grep remap-home` — `0` in the second column = running, `1` = crashing.
-- **View logs**: `cat /tmp/remap-home-to-slash.log` and `cat /tmp/remap-home-to-slash.err`
+- **View logs**: `cat /tmp/remap-ctl.log` and `cat /tmp/remap-ctl.err`
 - **Wrong characters**: The code sets Unicode directly, so layout shouldn't matter. If wrong, verify config hex values.
 - **jq not found**: `brew install jq` (required for CLI, not for the daemon itself)
 

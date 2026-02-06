@@ -60,7 +60,7 @@ var activeRemaps: Set<Int64> = []
 
 func configPath() -> String {
     let home = FileManager.default.homeDirectoryForCurrentUser.path
-    return "\(home)/.config/remap-home-to-slash/config.json"
+    return "\(home)/.config/remap-ctl/config.json"
 }
 
 func parseHex(_ hex: String) -> UniChar? {
@@ -231,9 +231,9 @@ CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
 CGEvent.tapEnable(tap: tap, enable: true)
 
 if mappingDesc.isEmpty {
-    print("remap-home-to-slash: running (no mappings loaded)")
+    print("remap-ctl: running (no mappings loaded)")
 } else {
-    print("remap-home-to-slash: running (\(mappingDesc.joined(separator: "; ")))")
+    print("remap-ctl: running (\(mappingDesc.joined(separator: "; ")))")
 }
 
 CFRunLoopRun()

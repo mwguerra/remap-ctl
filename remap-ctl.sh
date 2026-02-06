@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# remap-ctl.sh — CLI management for remap-home-to-slash
+# remap-ctl.sh — CLI management for remap-ctl
 # Manages config, compilation, installation, and the LaunchAgent daemon.
 
-BUNDLE_ID="com.guerra.remap-home-to-slash"
-APP_NAME="RemapHomeToSlash"
+BUNDLE_ID="com.guerra.remap-ctl"
+APP_NAME="RemapCtl"
 APP_BUNDLE="${APP_NAME}.app"
 INSTALL_PATH="/Applications/${APP_BUNDLE}"
 PLIST_PATH="$HOME/Library/LaunchAgents/${BUNDLE_ID}.plist"
-CONFIG_DIR="$HOME/.config/remap-home-to-slash"
+CONFIG_DIR="$HOME/.config/remap-ctl"
 CONFIG_FILE="${CONFIG_DIR}/config.json"
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
@@ -249,26 +249,26 @@ cmd_restart() {
     if daemon_is_loaded; then
         echo "Daemon restarted successfully."
     else
-        echo "Warning: daemon may not have started. Check /tmp/remap-home-to-slash.err for errors."
+        echo "Warning: daemon may not have started. Check /tmp/remap-ctl.err for errors."
     fi
 }
 
 cmd_install() {
     require_jq
 
-    echo "=== remap-home-to-slash installer ==="
+    echo "=== remap-ctl installer ==="
     echo ""
 
     # Step 1: Compile
     echo "[1/6] Compiling..."
     cd "$SCRIPT_DIR"
-    swiftc -O -o remap-home-to-slash remap-home-to-slash.swift
+    swiftc -O -o remap-ctl remap-ctl.swift
     echo "  Compiled successfully."
 
     # Step 2: Build .app bundle
     echo "[2/6] Building .app bundle..."
     mkdir -p "${APP_BUNDLE}/Contents/MacOS"
-    cp remap-home-to-slash "${APP_BUNDLE}/Contents/MacOS/"
+    cp remap-ctl "${APP_BUNDLE}/Contents/MacOS/"
     echo "  Bundle ready."
 
     # Step 3: Sign
@@ -317,16 +317,16 @@ CONFIGEOF
     <string>${BUNDLE_ID}</string>
     <key>ProgramArguments</key>
     <array>
-        <string>${INSTALL_PATH}/Contents/MacOS/remap-home-to-slash</string>
+        <string>${INSTALL_PATH}/Contents/MacOS/remap-ctl</string>
     </array>
     <key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>
     <true/>
     <key>StandardOutPath</key>
-    <string>/tmp/remap-home-to-slash.log</string>
+    <string>/tmp/remap-ctl.log</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/remap-home-to-slash.err</string>
+    <string>/tmp/remap-ctl.err</string>
 </dict>
 </plist>
 PLISTEOF
@@ -343,7 +343,7 @@ PLISTEOF
     echo "IMPORTANT: Grant Accessibility permission to the app:"
     echo "  1. Open System Settings → Privacy & Security → Accessibility"
     echo "  2. Click + and navigate to /Applications"
-    echo "  3. Select RemapHomeToSlash and enable it"
+    echo "  3. Select RemapCtl and enable it"
     echo ""
     echo "If you previously had the app installed, you may need to:"
     echo "  1. Remove the old entry from Accessibility"
@@ -351,11 +351,11 @@ PLISTEOF
     echo "  3. Add it again"
     echo ""
     echo "Verify it's running: launchctl list | grep remap-home"
-    echo "View logs: cat /tmp/remap-home-to-slash.log"
+    echo "View logs: cat /tmp/remap-ctl.log"
 }
 
 cmd_uninstall() {
-    echo "=== remap-home-to-slash uninstaller ==="
+    echo "=== remap-ctl uninstaller ==="
     echo ""
 
     # Step 1: Unload agent
@@ -402,7 +402,7 @@ cmd_uninstall() {
 
     echo ""
     echo "=== Uninstall complete ==="
-    echo "Log files at /tmp/remap-home-to-slash.{log,err} were left in place."
+    echo "Log files at /tmp/remap-ctl.{log,err} were left in place."
 }
 
 # --- Main ---
@@ -418,7 +418,7 @@ case "$cmd" in
     install)    cmd_install ;;
     uninstall)  cmd_uninstall ;;
     *)
-        echo "remap-ctl — manage remap-home-to-slash key remapper"
+        echo "remap-ctl — manage remap-ctl key remapper"
         echo ""
         echo "Usage:"
         echo "  remap-ctl set <keycode> <hex> [--shift <hex>] [--option <hex>] [--cmd <hex>]"
