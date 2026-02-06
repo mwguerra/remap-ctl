@@ -119,17 +119,6 @@ Modifier-aware: the callback checks which modifiers are held and looks up the ap
 
 The binary is wrapped in a `.app` bundle because macOS only reliably accepts `.app` bundles for Accessibility permissions.
 
-## Migration from v1 (hardcoded)
-
-If you had the old hardcoded version installed:
-
-1. Run `./remap-ctl.sh install` — this will recompile and reinstall
-2. The installer creates a default config with the same Home→/ mapping
-3. **Re-grant Accessibility permission** (the binary signature changed):
-   - System Settings → Privacy & Security → Accessibility
-   - Remove the old RemapCtl entry, then add it again
-   - Or run `tccutil reset Accessibility com.guerra.remap-ctl` then re-add
-
 ## Troubleshooting
 
 - **"Could not create event tap"**: Grant Accessibility permission. If already listed, remove and re-add it.
@@ -146,3 +135,7 @@ If you had the old hardcoded version installed:
 ```
 
 This unloads the agent, removes the plist, removes the app from /Applications, deletes the config directory, and resets the TCC permission.
+
+## License
+
+MIT
