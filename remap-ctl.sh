@@ -350,7 +350,7 @@ PLISTEOF
     echo "  2. Run: tccutil reset Accessibility $BUNDLE_ID"
     echo "  3. Add it again"
     echo ""
-    echo "Verify it's running: launchctl list | grep remap-home"
+    echo "Verify it's running: launchctl list | grep remap-ctl"
     echo "View logs: cat /tmp/remap-ctl.log"
 }
 
